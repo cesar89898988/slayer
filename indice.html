@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>¿Quieres ser mi novia?</title>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet" href="estilo.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+  .opciones p.no {
+    cursor: pointer;
+    position: relative;
+  }
+</style>
+<script>
+$(document).ready(function(){
+    $('.opciones p.si').click(function(){
+        $('#si').fadeIn();
+    });
+
+    // Probabilidad de que el cuadro se mueva (de 0 a 1)
+    var probability = 0.1; // Puedes ajustar este valor según desees
+
+    // Función para calcular y aplicar nuevas posiciones al botón "No"
+    function moveNoButton() {
+        // Obtener dimensiones de la ventana
+        var windowHeight = $(window).height();
+        var windowWidth = $(window).width();
+
+        // Obtener dimensiones del botón "No"
+        var buttonHeight = $('.opciones p.no').outerHeight();
+        var buttonWidth = $('.opciones p.no').outerWidth();
+
+        // Calcular nuevas posiciones aleatorias para el botón "No"
+        var newTop = Math.random() * (windowHeight - buttonHeight);
+        var newLeft = Math.random() * (windowWidth - buttonWidth);
+
+        // Aplicar nuevas posiciones al botón "No"
+        $('.opciones p.no').css({
+            'top': newTop + 'px',
+            'left': newLeft + 'px',
+            'position': 'absolute'
+        });
+    }
+
+    $('.opciones p.no').click(function(){
+        // Generar un número aleatorio entre 0 y 1
+        var randomNum = Math.random();
+
+        // Verificar si el botón "No" debe moverse o no basado en la probabilidad
+        if (randomNum < probability) {
+            moveNoButton(); // Mover el botón "No" si pasa la probabilidad
+        }
+    });
+});
+</script>
+</head>
+<body>
+<div class="contenedor">
+    <h1>¿Quieres ser mi novia?</h1>
+    <div class="opciones">
+        <p class="si">Sí</p>
+        <p class="no">No</p>
+        <div id="no" class="respuesta">
+            <h2>¡te voy a secuestrar!</h2>
+        </div>
+        <div id="si" class="respuesta">
+            <h2>¡Preparate el culo!</h2>
+        </div>
+    </div>
+</div>
+</body>
+</html>
